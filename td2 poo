@@ -370,3 +370,76 @@ int main() {
 
     return 0;
 }
+exercice11:
+#include <iostream>
+#include <cmath>
+
+class vecteur3d {
+private:
+    float x, y, z;
+
+public:
+    // Constructeur avec des valeurs par défaut (0)
+    vecteur3d(float x = 0, float y = 0, float z = 0) : x(x), y(y), z(z) {}
+
+    // Affichage des 3 composantes du vecteur
+    void afficher() const {
+        std::cout << "(" << x << ", " << y << ", " << z << ")" << std::endl;
+    }
+
+    // Somme de deux vecteurs
+    vecteur3d somme(const vecteur3d& v) const {
+        return vecteur3d(x + v.x, y + v.y, z + v.z);
+    }
+
+    // Produit scalaire de deux vecteurs
+    float produitScalaire(const vecteur3d& v) const {
+        return x * v.x + y * v.y + z * v.z;
+    }
+
+    // Vérifie si deux vecteurs ont les mêmes composantes
+    bool coincide(const vecteur3d& v) const {
+        return (x == v.x) && (y == v.y) && (z == v.z);
+    }
+
+    // Renvoie la norme du vecteur
+    float norme() const {
+        return sqrt(x*x + y*y + z*z);
+    }
+
+    // Obtient le vecteur avec la plus grande norme parmi deux vecteurs
+    static vecteur3d normax(const vecteur3d& v1, const vecteur3d& v2) {
+        return (v1.norme() > v2.norme()) ? v1 : v2;
+    }
+};
+
+int main() {
+    vecteur3d v1(1, 2, 3);
+    vecteur3d v2(4, 5, 6);
+
+    v1.afficher();
+    v2.afficher();
+
+    vecteur3d somme = v1.somme(v2);
+    std::cout << "Somme : ";
+    somme.afficher();
+
+    float produit = v1.produitScalaire(v2);
+    std::cout << "Produit scalaire : " << produit << std::endl;
+
+    bool coincide = v1.coincide(v2);
+    std::cout << "Coincide : " << (coincide ? "true" : "false") << std::endl;
+
+    float norme_v1 = v1.norme();
+    float norme_v2 = v2.norme();
+    std::cout << "Norme de v1 : " << norme_v1 << std::endl;
+    std::cout << "Norme de v2 : " << norme_v2 << std::endl;
+
+    vecteur3d max = vecteur3d::normax(v1, v2);
+    std::cout << "Le vecteur avec la plus grande norme est : ";
+    max.afficher();
+
+    return 0;
+}
+
+
